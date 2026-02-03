@@ -83,13 +83,26 @@ npm install
 npm run dev
 ```
 
-### 3. Setup Demo Data
+### 3. Run Multi-Agent Demo
+
+```bash
+# Portfolio analysis + execution demo
+npm run demo:agents
+
+# Jupiter swap integration demo
+npm run demo:jupiter
+
+# Solana client + yield aggregator demo
+npm run demo:solana
+```
+
+### 4. Setup Demo Data (API)
 
 ```bash
 curl -X POST http://localhost:3000/api/demo/setup
 ```
 
-### 4. Create an Intent
+### 5. Create an Intent
 
 ```bash
 # Research agent sends task to execution agent
@@ -206,8 +219,21 @@ pub struct AgentIntent {
 - **PDAs**: Agent identities, model profiles, and intents stored on-chain
 - **SPL Token Escrow**: Payment locked until intent completed
 - **Events**: `AgentRegistered`, `IntentCreated`, `IntentStatusUpdated`
-- **Jupiter Integration**: Swap execution via agent wallets
+- **Jupiter Integration**: Swap execution via agent wallets with quote/swap APIs
+- **DeFi Protocols**: Marinade (mSOL), Jito (jitoSOL), Kamino, Drift yield tracking
+- **Yield Aggregator**: Real-time APY comparison across protocols
 - **Devnet Deployed**: Program ID `AgentMesh111111111111111111111111111111111`
+
+## 📁 Source Files
+
+| File | Description |
+|------|-------------|
+| `programs/agent-mesh/src/lib.rs` | Anchor program - PDAs & instructions |
+| `app/src/index.ts` | REST API server (10 endpoints) |
+| `app/src/mesh-controller.ts` | Off-chain runtime, LLM integration |
+| `app/src/jupiter.ts` | Jupiter DEX integration (quote/swap) |
+| `app/src/solana-client.ts` | Solana RPC client, yield aggregator |
+| `app/src/agents.ts` | Research + Execution agent implementations |
 
 ## 🏆 Hackathon Categories
 
